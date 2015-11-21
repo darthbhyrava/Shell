@@ -71,13 +71,15 @@ char **lsh_split_line(char *line)
 		exit(EXIT_FAILURE);
 	}
 	
-	//strtok() tokenizes the string; it returns pointers to within the string, and places a \0 at the end of each token.
-	//We store each pointer in an array of pointers 
+	//strtok() tokenizes the string; it returns pointers to within the string to the first token, and places a \0 at the end of each token.
+	//we store each pointer in an array of pointers 
 	token = strtok(line, LSH_TOK_DELIM);
 	while(token!==NULL)
 	{
+		//Pointers to tokens being stored in array
 		tokens[position]=token;
 		position++;
+
 		if(position >= bufsize) 
 		{
 			bufsize+=LSH_TOK_BUFSIZE;
@@ -88,6 +90,7 @@ char **lsh_split_line(char *line)
 				exit(EXIT_FAILURE);
 			}
 		}
+		//What is happening here? Why NULL string?
 		token=strtok(NULL, LSH_TOK_DELIM);
 	}
 	tokens[position]=NULL;
